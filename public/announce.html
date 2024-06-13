@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anunciar Livro - Troca de Livros</title>
+    <link rel="stylesheet" href="css/announce.css">
+</head>
+<body>
+    <div class="overlay">
+        <header>
+            <h1>Troca de Livros</h1>
+            <nav>
+                <a href="index.html">Página Inicial</a>
+                <a href="search.html">Pesquisar Livros</a>
+            </nav>
+        </header>
+        <main>
+            <section id="form-section">
+                <h2>Anuncie seu Livro</h2>
+                <form id="book-form">
+                    <label for="title">Título do Livro:</label>
+                    <input type="text" id="title" name="title" required>
+                    
+                    <label for="author">Autor:</label>
+                    <input type="text" id="author" name="author" required>
+                    
+                    <label for="desired-books">Livros Desejados:</label>
+                    <input type="text" id="desired-books" name="desired-books" placeholder="Separe os livros por vírgulas" required>
+
+                    <label for="email">Seu e-mail:</label>
+                    <input type="email" id="email" name="email" placeholder="Seu e-mail">
+
+                    <label for="phone">Seu telefone:</label>
+                    <input type="text" id="phone" name="phone" placeholder="Seu telefone">
+                    
+                    <label for="city">Cidade:</label>
+                    <input type="text" id="city" name="city" placeholder="Sua cidade">
+
+                    <button type="submit">Anunciar</button>
+                </form>
+            </section>
+        </main>
+    </div>
+    <script src="js/announce.js"></script>
+</body>
+</html>

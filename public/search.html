@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pesquisar Livros - Troca de Livros</title>
+    <link rel="stylesheet" href="css/search.css">
+</head>
+<body>
+    <div class="overlay">
+        <header>
+            <h1>Pesquisar Livros</h1>
+            <nav>
+                <a href="index.html">Página Inicial</a>
+                <a href="announce.html">Anunciar Livro</a>
+            </nav>
+        </header>
+        <main>
+            <section id="search-section">
+                <h2>Pesquisar Livros</h2>
+                <form id="search-form">
+                    <label for="search-term">Pesquisar por:</label>
+                    <select id="search-type">
+                        <option value="title">Nome</option>
+                        <option value="author">Autor</option>
+                    </select>
+                    <input type="text" id="search-term" name="search-term" required>
+                    <button type="submit">Pesquisar</button>
+                </form>
+            </section>
+            <section id="results-section">
+                <h2>Resultados da Pesquisa</h2>
+                <ul id="results-list"></ul>
+            </section>
+        </main>
+    </div>
+    <script src="js/search.js"></script>
+</body>
+</html>

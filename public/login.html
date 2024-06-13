@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login de Usuário</title>
+    <link rel="stylesheet" href="css/loggin.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Login de Usuário</h2>
+        <form id="loginForm" onsubmit="loginUser(event)">
+            <label for="email">Email:</label><br>
+            <input type="email" id="email" name="email" required><br>
+            <label for="senha">Senha:</label><br>
+            <input type="password" id="senha" name="senha" required><br>
+            <input type="submit" value="Entrar">
+        </form>
+    </div>
+    <script src="js/login.js"></script>
+</body>
+</html>
