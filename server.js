@@ -2,6 +2,7 @@ const express = require('express');
 const sqlite3 = require('sqlite3').verbose();
 const bodyParser = require('body-parser');
 const path = require('path');
+const session = require('express-session');
 
 const app = express();
 const dbPath = path.resolve(__dirname, 'database.db');
@@ -15,7 +16,12 @@ const db = new sqlite3.Database(dbPath, (err) => {
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static('public'));
+app.use(session({
+    secret: 'your-secret-key',
+    resave: false,
+    saveUninitialized: true,
+}));
 
 // Criação das tabelas
 db.serialize(() => {
@@ -35,6 +41,14 @@ db.serialize(() => {
         }
     });
 });
+
+// Middleware de autenticação
+function isAuthenticated(req, res, next) {
+    if (req.session.userId) {
+        return next();
+    }
+    res.status(401).json({ message: 'Usuário não autenticado' });
+}
 
 // Rota para cadastro de usuários
 app.post('/cadastro', (req, res) => {
@@ -61,9 +75,47 @@ app.post('/cadastro', (req, res) => {
     });
 });
 
+// Rota para login
+app.post('/login', (req, res) => {
+    const { email, senha } = req.body;
+
+    console.log('Tentativa de login:', req.body);
+
+    // Verifique as credenciais do usuário no banco de dados
+    const query = `SELECT * FROM usuarios WHERE email = ? AND senha = ?`;
+    db.get(query, [email, senha], (err, row) => {
+        if (err) {
+            console.error('Erro ao fazer login:', err.message);
+            return res.status(500).json({ message: 'Erro ao fazer login' });
+        }
+        if (!row) {
+            return res.status(400).json({ message: 'Credenciais inválidas' });
+        }
+        req.session.userId = row.id;
+        req.session.userEmail = row.email;
+        req.session.userName = row.nome;
+        console.log('Login realizado com sucesso!', { userId: row.id });
+        res.json({ message: 'Login realizado com sucesso!' });
+    });
+});
+
+// Rota para obter informações do usuário
+app.get('/user-info', isAuthenticated, (req, res) => {
+    const userId = req.session.userId;
+    const query = `SELECT nome, email FROM usuarios WHERE id = ?`;
+    db.get(query, [userId], (err, row) => {
+        if (err) {
+            console.error('Erro ao obter informações do usuário:', err.message);
+            return res.status(500).json({ message: 'Erro ao obter informações do usuário' });
+        }
+        res.json(row);
+    });
+});
+
 // Rota para adicionar um livro
-app.post('/add-book', (req, res) => {
-    const { title, author, desiredBooks, email, phone, city } = req.body;
+app.post('/add-book', isAuthenticated, (req, res) => {
+    const { title, author, desiredBooks, phone, city } = req.body;
+    const email = req.session.userEmail;
 
     console.log('Dados recebidos para adicionar livro:', req.body);
 
@@ -85,19 +137,26 @@ app.post('/add-book', (req, res) => {
 
 // Rota para obter todos os livros
 app.get('/get-books', (req, res) => {
-    db.all("SELECT * FROM books", (err, rows) => {
+    const query = "SELECT * FROM books";
+    db.all(query, (err, rows) => {
         if (err) {
             console.error('Erro ao obter livros:', err.message);
-            res.json([]);
-        } else {
-            res.json(rows);
+            return res.status(500).json({ message: 'Erro ao obter livros' });
         }
+        res.json(rows);
     });
 });
+
 
 // Rota para servir a página inicial
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
+
+
+// Rota para a área do usuário
+app.get('/user', isAuthenticated, (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'user.html'));
 });
 
 // Rota para busca de livros
@@ -131,31 +190,8 @@ app.get('/search', (req, res) => {
     });
 });
 
-// Rota para login
-app.post('/login', (req, res) => {
-    const { email, senha } = req.body;
-
-    console.log('Tentativa de login:', req.body);
-
-    // Verifique as credenciais do usuário no banco de dados
-    const query = `SELECT * FROM usuarios WHERE email = ? AND senha = ?`;
-    db.get(query, [email, senha], (err, row) => {
-        if (err) {
-            console.error('Erro ao fazer login:', err.message);
-            return res.status(500).json({ message: 'Erro ao fazer login' });
-        }
-        if (!row) {
-            return res.status(400).json({ message: 'Credenciais inválidas' });
-        }
-        res.json({ message: 'Login realizado com sucesso!' });
-    });
-});
-
-
 // Inicializa o servidor
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`Servidor rodando na porta ${PORT}`);
 });
-
-
