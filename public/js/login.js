@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', function() {
         })
         .catch(error => {
             console.error('Erro ao fazer login:', error);
-            alert('Erro ao fazer login. Verifique o console para mais detalhes.');
+            alert('Erro ao fazer login. Verifique o email e senha.');
         });
     });
 });

@@ -29,12 +29,45 @@ document.addEventListener('DOMContentLoaded', function() {
                 books.forEach(book => {
                     if (book.email === email) {
                         const li = document.createElement('li');
-                        li.textContent = `${book.title} por ${book.author}`;
+                        li.className = 'book-item';
+                        li.innerHTML = `
+                            <span>${book.title} por ${book.author}</span>
+                            <button class="delete-button" data-book-id="${book.id}">Excluir</button>
+                        `;
                         userBooks.appendChild(li);
                     }
                 });
+
+                // Adiciona o manipulador de eventos para os botões de exclusão
+                document.querySelectorAll('.delete-button').forEach(button => {
+                    button.addEventListener('click', function() {
+                        const bookId = this.getAttribute('data-book-id');
+                        deleteBook(bookId, email);
+                    });
+                });
             })
             .catch(error => console.error('Erro ao carregar livros do usuário:', error));
+    }
+
+    // Função para excluir livro
+    function deleteBook(bookId, email) {
+        fetch(`/delete-book/${bookId}`, {
+            method: 'DELETE'
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Erro ao excluir livro');
+            }
+            return response.json();
+        })
+        .then(data => {
+            alert('Livro excluído com sucesso!');
+            loadUserBooks(email); // Recarrega os livros após a exclusão
+        })
+        .catch(error => {
+            console.error('Erro ao excluir livro:', error);
+            alert('Erro ao excluir livro. Verifique o console para mais detalhes.');
+        });
     }
 
     // Logout do usuário

@@ -1,6 +1,11 @@
 document.addEventListener('DOMContentLoaded', () => {
     const searchForm = document.getElementById('search-form');
     const resultsList = document.getElementById('results-list');
+    const chatModal = document.getElementById('chatModal');
+    const closeChatBtn = document.querySelector('.close');
+    const chatMessages = document.getElementById('chatMessages');
+    const chatForm = document.getElementById('chatForm');
+    const messageInput = document.getElementById('messageInput');
 
     searchForm.addEventListener('submit', (e) => {
         e.preventDefault();
@@ -42,9 +47,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Botão "Fechar Negócio"
                 const closeButton = document.createElement('button');
                 closeButton.textContent = 'Fechar Negócio';
-                closeButton.classList.add('close-deal-btn'); // Adiciona classe para estilização
+                closeButton.classList.add('close-deal-btn');
                 closeButton.addEventListener('click', () => {
-                    closeDeal(book.id); // Chama a função para fechar o negócio com o livro específico
+                    openChatModal(book.email);
                 });
 
                 li.appendChild(closeButton);
@@ -53,23 +58,35 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Função para fechar o negócio com um livro específico
-    function closeDeal(bookId) {
-        fetch(`/close-deal/${bookId}`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ bookId }),
-        })
-        .then(response => response.json())
-        .then(data => {
-            alert(data.message); // Exibe uma mensagem com o resultado da ação
-            // Aqui você pode adicionar mais ações conforme necessário, como atualizar a lista de livros, etc.
-        })
-        .catch(error => {
-            console.error('Erro ao fechar o negócio:', error);
-            alert('Erro ao fechar o negócio. Verifique o console para mais detalhes.');
-        });
+    function openChatModal(email) {
+        chatModal.style.display = 'block';
+        chatMessages.innerHTML = ''; // Limpa as mensagens anteriores
+
+        closeChatBtn.onclick = () => {
+            chatModal.style.display = 'none';
+        };
+
+        window.onclick = (event) => {
+            if (event.target === chatModal) {
+                chatModal.style.display = 'none';
+            }
+        };
+
+        chatForm.onsubmit = (e) => {
+            e.preventDefault();
+            const message = messageInput.value.trim();
+            if (message) {
+                displayMessage('Você', message);
+                messageInput.value = '';
+            }
+        };
+    }
+
+    function displayMessage(sender, message) {
+        const msgDiv = document.createElement('div');
+        msgDiv.classList.add('message');
+        msgDiv.innerHTML = `<strong>${sender}:</strong> ${message}`;
+        chatMessages.appendChild(msgDiv);
+        chatMessages.scrollTop = chatMessages.scrollHeight; // Rolagem automática para a última mensagem
     }
 });
