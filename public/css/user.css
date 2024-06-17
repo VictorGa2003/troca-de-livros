@@ -1,67 +1,89 @@
-body {
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
     font-family: Arial, sans-serif;
-    background-color: #f0f0f0;
+  }
+  
+  body {
+    background: url('imagens/estante2.png') no-repeat center center fixed; /* Adicione a imagem de fundo aqui */
+    background-size: cover;
+    background-color: #f0f2f5;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
     margin: 0;
-}
-
-.container {
-    background-color: white;
+  }
+  
+  /* Container */
+  .container {
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-h2 {
+    width: 550px;
+    text-align: center;
+  }
+  
+  .container h2 {
     margin-bottom: 20px;
     color: #333;
-}
-
-h3 {
-    margin-top: 20px;
-    color: #333;
-}
-
-label {
-    display: block;
-    margin: 10px 0 5px;
+  }
+  
+  #userInfo p {
+    margin: 10px 0;
     color: #555;
-}
-
-input[type="email"],
-input[type="password"],
-input[type="text"] {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 20px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-}
-
-input[type="submit"] {
-    background-color: #007BFF;
-    color: white;
-    padding: 10px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-input[type="submit"]:hover {
-    background-color: #0056b3;
-}
-
-ul {
-    list-style-type: none;
+  }
+  
+  h3 {
+    margin-top: 20px;
+    margin-bottom: 10px;
+    color: #333;
+  }
+  
+  #userBooks {
+    list-style: none;
     padding: 0;
-}
-
-ul li {
-    background-color: #f9f9f9;
+  }
+  
+  .book-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #f7f7f7;
+    border-radius: 5px;
     padding: 10px;
-    margin: 5px 0;
-    border-radius: 4px;
-}
+    margin-bottom: 10px;
+    color: #555;
+  }
+  
+  .delete-button {
+    background-color: #ff4b5c;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .delete-button:hover {
+    background-color: #ff1f3d;
+  }
+  
+  #logoutButton {
+    margin-top: 20px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #ff4b5c;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  #logoutButton:hover {
+    background-color: #ff1f3d;
+  }

@@ -5,25 +5,31 @@
     box-sizing: border-box;
 }
 
+label{
+    font-family: Arial, sans-serif;
+    color: #ffffff;
+}
+
 body {
     font-family: Arial, sans-serif;
-    background: url('estante.png') no-repeat center center fixed; /* Adicione a imagem de fundo aqui */
+    background: url('imagens/estante2.png') no-repeat center center fixed; /* Adicione a imagem de fundo aqui */
     background-size: cover;
-    color: #333;
+    color: #000000;
     line-height: 1.6;
     padding: 20px;
 }
 
 /* Estilização do overlay para melhor legibilidade */
 .overlay {
-    background: rgba(255, 255, 255, 0.582);
+    background: rgba(0, 0, 0, 0.63);
     padding: 20px;
     border-radius: 10px;
 }
 
 /* Estilização do header */
 header {
-    background-color: #0033a1;
+    font-family:Georgia, 'Times New Roman', Times, serif;
+    background-color: #481E14;
     color: white;
     padding: 20px 0;
     text-align: center;
@@ -39,7 +45,8 @@ nav {
 }
 
 nav a {
-    color: white;
+    font-family: Arial, sans-serif;
+    color: #DC5F00;
     text-decoration: none;
     margin: 0 10px;
     padding: 5px 10px;
@@ -57,7 +64,7 @@ main {
 }
 
 section h2 {
-    color: #0033a1;
+    color: #DC5F00;
     margin-bottom: 10px;
     text-align: center;
 }
@@ -91,7 +98,7 @@ section h2 {
 }
 
 #search-form button {
-    background-color: #0033a1;
+    background-color: #481E14;
     color: white;
     border: none;
     padding: 10px;
@@ -133,14 +140,14 @@ section h2 {
 
 #results-list li .contact-info {
     font-size: 0.9em;
-    color: #666;
+    color: #000000;
 }
 
-/* Estilização do botão "Fechar Negócio" */
+/* Estilos do botão "Fechar Negócio" */
 .close-deal-btn {
     display: block;
-    background-color: #f44336;
-    color: white;
+    background-color: #36f46f;
+    color: rgb(0, 0, 0);
     border: none;
     padding: 8px 16px;
     text-align: center;
@@ -154,4 +161,90 @@ section h2 {
 
 .close-deal-btn:hover {
     background-color: #d32f2f;
+}
+
+/* Estilos do modal para posicionar no canto inferior direito */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000; 
+    bottom: 0;
+    right: 0;
+    width: 300px; /* Defina uma largura adequada */
+    height: 400px; /* Defina uma altura adequada */
+    overflow: hidden;
+    background-color: rgba(0, 0, 0, 0.75); /* Fundo semitransparente */
+    border-radius: 10px 10px 0 0; /* Canto superior arredondado */
+    box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.5); /* Sombra para destaque */
+}
+
+/* Ajuste do conteúdo do modal */
+.modal-content {
+    background-color: #ffffffad;
+    margin: 10; /* Remova a margem */
+    padding: 20px;
+    border: none; /* Remova a borda */
+    width: 100%;
+    height: 100%;
+    border-radius: 10px 10px 0 0;
+    box-shadow: none; /* Remova a sombra */
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* Estilo para o botão de fechar */
+.close {
+    color: #ff0000;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+}
+
+/* Estilo para as mensagens */
+#chatMessages {
+    flex: 1;
+    overflow-y: auto;
+    margin-bottom: 10px;
+    padding: 10px;
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    text-align: left;
+}
+
+/* Estilo para o formulário do chat */
+#chatForm {
+    display: flex;
+}
+
+#messageInput {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px 0 0 5px;
+}
+
+#chatForm button {
+    padding: 10px;
+    border: none;
+    border-radius: 0 5px 5px 0;
+    background-color: #0033a1;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#chatForm button:hover {
+    background-color: #002080;
 }
