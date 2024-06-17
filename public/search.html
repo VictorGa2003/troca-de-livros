@@ -13,27 +13,60 @@
             <nav>
                 <a href="index.html">Página Inicial</a>
                 <a href="announce.html">Anunciar Livro</a>
-            </nav>
-        </header>
-        <main>
-            <section id="search-section">
-                <h2>Pesquisar Livros</h2>
-                <form id="search-form">
-                    <label for="search-term">Pesquisar por:</label>
-                    <select id="search-type">
-                        <option value="title">Nome</option>
-                        <option value="author">Autor</option>
-                    </select>
-                    <input type="text" id="search-term" name="search-term" required>
-                    <button type="submit">Pesquisar</button>
-                </form>
-            </section>
-            <section id="results-section">
-                <h2>Resultados da Pesquisa</h2>
-                <ul id="results-list"></ul>
-            </section>
-        </main>
+                <span id="registerLoginButtons">
+                    <a href="register.html">Cadastro</a>
+                    <a href="login.html">Login</a>
+                </span>
+                <a href="user.html" id="userAreaLink" style="display: none;">Área do Usuário</a>
+        </nav>
+    </header>
+    <main>
+        <section id="search-section">
+            <h2>Pesquisar Livros</h2>
+            <form id="search-form">
+                <label for="search-term">Pesquisar por:</label>
+                <select id="search-type">
+                    <option value="title">Nome</option>
+                    <option value="author">Autor</option>
+                </select>
+                <input type="text" id="search-term" name="search-term" required>
+                <button type="submit">Pesquisar</button>
+            </form>
+        </section>
+        <section id="results-section">
+            <h2>Resultados da Pesquisa</h2>
+            <ul id="results-list"></ul>
+        </section>
+    </main>
+</div>
+
+<!-- Modal de Chat -->
+<div id="chatModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Chat com o Anunciante</h2>
+        <div id="chatMessages"></div>
+        <form id="chatForm">
+            <input type="text" id="messageInput" placeholder="Digite sua mensagem...">
+            <button type="submit">Enviar</button>
+        </form>
     </div>
-    <script src="js/search.js"></script>
+</div>
+
+<script src="js/search.js"></script>
+<script>
+    // Verifica se o usuário está autenticado
+    fetch('/user-info')
+        .then(response => {
+            if (response.ok) {
+                document.getElementById('registerLoginButtons').style.display = 'none';
+                document.getElementById('userAreaLink').style.display = 'inline-block';
+                document.getElementById('logoutLink').style.display = 'inline-block';
+            }
+        })
+        .catch(error => {
+            console.error('Erro ao verificar autenticação:', error);
+        });
+</script>
 </body>
 </html>

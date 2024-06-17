@@ -1,21 +1,34 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login de Usuário</title>
+    <title>Login - Troca de Livros</title>
     <link rel="stylesheet" href="css/login.css">
 </head>
 <body>
-    <div class="container">
-        <h2>Login de Usuário</h2>
-        <form id="loginForm" onsubmit="loginUser(event)">
-            <label for="email">Email:</label><br>
-            <input type="email" id="email" name="email" required><br>
-            <label for="senha">Senha:</label><br>
-            <input type="password" id="senha" name="senha" required><br>
-            <input type="submit" value="Entrar">
-        </form>
+    </header>
+    <div class="background">
+        <div class="login-container">
+            <h1>Entrar</h1>
+            <form id="loginForm">
+                <div class="input-group">
+                    <input type="email" id="email" name="email" placeholder="Email ou número de telefone" required>
+                </div>
+                <div class="input-group">
+                    <input type="password" id="senha" name="senha" placeholder="Senha" required>
+                </div>
+                <button type="submit" class="btn-login">Entrar</button>
+                <div class="options">
+                    <label>
+                        <input type="checkbox" name="remember"> Lembre-se de mim
+              
+                <div class="signup-link">
+                    <p>Novo por aqui? <a href="register.html"> realize seu cadastro</a></p>
+                    <p><a href="index.html"> Página inicial</a></p>
+                </div>
+            </form>
+        </div>
     </div>
     <script src="js/login.js"></script>
 </body>

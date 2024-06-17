@@ -1,23 +1,49 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastro de Usuário</title>
+    <title>Cadastro - Troca de Livros</title>
     <link rel="stylesheet" href="css/register.css">
 </head>
 <body>
-    <h1>Cadastro de Usuário</h1>
-    <form id="cadastroForm">
-        <label for="nome">Nome:</label>
-        <input type="text" id="nome" name="nome" required><br><br>
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" required><br><br>
-        <label for="senha">Senha:</label>
-        <input type="password" id="senha" name="senha" required><br><br>
-        <button type="submit">Cadastrar</button>
-    </form>
-    <p id="mensagem"></p>
+    <div class="container">
+        <header>
+  
+         
+        </header>
+        <div class="register-container">
+            <h1>Pronto para começar a trocar seus livros?</h1>
+            <form id="cadastroForm">
+                <div class="input-group">
+                    <label for="nome">nome</label>
+                    <input type="nome" id="nome" name="nome" required>
+                </div>
+                <div class="input-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="input-group">
+                    <label for="senha">Escolha uma senha (4-60 caracteres)</label>
+                    <input type="password" id="senha" name="senha" required minlength="4" maxlength="60">
+                </div>
+                <button type="submit" class="btn-register">Cadastre-se</button>
+                <div class="signup-link">
+                    <p><a href="login.html"> Já tem cadastro?</a></p>
+                    
+                    <p><a href="index.html"> Página inicial</a></p>
+                </div>
+            </form>
+            <p id="mensagem"></p>
+        </div>
+        <footer>
+            <div class="footer-content">
+         
+                    </select>
+                </div>
+            </div>
+        </footer>
+    </div>
     <script src="js/register.js"></script>
 </body>
 </html>
